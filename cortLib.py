@@ -86,4 +86,6 @@ def getCategories():
     print(catList[0]['categoryName'])
     
     infile.close()
+    
+    return catList
 
