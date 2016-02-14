@@ -44,6 +44,12 @@ def disassociateFingerprints(FP1, FP2):
 	subExpression = {"sub": [{"positions": FP1}, {"positions": FP2}]}
 	return sFunctionFullClient.getFingerprintForExpression(json.dumps(subExpression)).positions
 
+#input: category - some category fingerprint
+#       string - some string to compare against category or fingerprint
+#output: similarity coefficient
+def compare(category, string):
+    return(FunctionLiteClient.compare(category, string))
+
 def exEstablishCategories():
     infile = open('dataset/categories.txt', 'w+')
     
@@ -66,42 +72,45 @@ def exEstablishCategories():
 #output: write to categories file
 def establishCategories():
     outfile = open('dataset/categories.txt', 'w')
-    
     newCat = input('New category name: ')
     newFilters = []
-    
     for i in range(0, 3):
         newFilters.append(input('Provide Filter: '))
-
     outfile.write('\n') # separate lines out    
-
     outfile.close()
 
 #input: nothing
 #output: return list of established categories from file
 def getCategories():
     catList = []    
-
     with open('dataset/categories.txt', 'r') as infile:
         for line in infile:
             catList.append(json.loads(line))
-
-    print(catList[0]['categoryName'])
-    
-    infile.close()
-    
+    infile.close()   
     return catList
+
+#input: text file
+#output: return fingerprint object
+def fileToFingerprint(newFile):
+    with open(newFile, 'r') as infile:
+        return(aFunctionFullClient.getFingerprintForText(infile).positions)
+
 
 
 # input: FP - fingerprint to compare against multiple category fingerprints
 #        catList = list of categories in JSON format: {"positions": <fingerprint>, "categoryName": <nameOfCategory>}
 # output: the index of the highest similarity of the FP to list of categories
 def bestMatch(FP, catList):
-        name = ""
-        bestRate = 0
-        for i in range(0, len(catList)):
-                simValue = FunctionLiteClient.compare(FP, catList[i]["positions"])
-                if ( simValue > bestRate):
-                        bestRate = simValue
-                        name = catList[i]["categoryName"]
- 	return name
+    name = ""
+    bestRate = 0
+    for i in range(0, len(catList)):
+        simValue = FunctionLiteClient.compare(FP, catList[i]["positions"])
+        if ( simValue > bestRate):
+            bestRate = simValue
+            name = catList[i]["categoryName"]
+    return name
+
+def addMoreCategories():
+    YesOrNo = input('More categories?')
+    return(YesOrNo == 'Y')
+        

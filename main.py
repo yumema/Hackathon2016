@@ -23,22 +23,26 @@ from cortLib import *
 categories = "dataset/categories.txt"
 
 def main():
+    """ ideal case: establish new if necessary
     try:
         categoryFingerprints = open(categories, 'r') #established
     except FileNotFoundError:
-        needNewCategories = True        
-
+        needNewCategories = True
         catCount = input("Please start establishing categories: ") #write in newcategories
         while needNewCategories:
             establishCategories()
             needNewCategories = addMoreCategories() #continue to add?
+    """
+    exEstablishCategories()
 
-        categoryFingerprints = open(oldDefs, 'r')
+#test case: fileToFingerprint
+
+    fileFingerprint = (fileToFingerprint('dataset/cv001_18431.txt'))
     
-    print(categoryFingerprints)
-    catList = getCategories()
-    print(catList)
-    
+#test case: compare
+    compareCategoryList = getCategories()
+    #compareValue = input("provide string: ")
+    print(compare(compareCategoryList[0]['positions'], fileFingerprint))
 
 if __name__ == "__main__":
     main()
