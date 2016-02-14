@@ -20,22 +20,24 @@
 
 from cortLib import *
 
-oldDefs = "dataset/categories.txt"
+categories = "dataset/categories.txt"
 
 def main():
-#    try:
-#        categoryFingerprints = open(oldDefs, 'r') #established
-#    except FileNotFoundError:
-#        catCount = input("Please start establishing categories: ") #write in newcategories
-#        establishCategories(catCount)
-    exEstablishCategories()
-#        categoryFingerprints = open(oldDefs, 'r')
-#    print(categoryFingerprints)
+    try:
+        categoryFingerprints = open(categories, 'r') #established
+    except FileNotFoundError:
+        needNewCategories = True        
 
-    #infile = open(oldDefs, 'w+')
-    #with open(oldDefs, 'r') as establishedCategories: #established
-           
-    getCategories()
+        catCount = input("Please start establishing categories: ") #write in newcategories
+        while needNewCategories:
+            establishCategories()
+            needNewCategories = addMoreCategories() #continue to add?
+
+        categoryFingerprints = open(oldDefs, 'r')
+    
+    print(categoryFingerprints)
+    catList = getCategories()
+    print(catList)
     
 
 if __name__ == "__main__":
