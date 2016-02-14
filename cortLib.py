@@ -39,4 +39,4 @@ def removeTermFromCategory(category, term):
 # output: the resulting fingerprint of removing FP2 from FP1
 def disassociateFingerprints(FP1, FP2):
 	subExpression = {"sub": [{"positions": FP1}, {"positions": FP2}]}
-	return sFunctionFullClient.getFingerprintForExpression(json.dumps(orExpression)).positions
+	return sFunctionFullClient.getFingerprintForExpression(json.dumps(subExpression)).positions
