@@ -108,7 +108,7 @@ def bestMatch(FP, catList):
         if ( simValue > bestRate):
             bestRate = simValue
             name = catList[i]["categoryName"]
-    return name
+    return(name, bestRate)
 
 def addMoreCategories():
     YesOrNo = input('More categories?')

@@ -1,22 +1,13 @@
 #filename: main.py
 #purpose: initial testing grounds, new beginnings
 #notes: be sure you have file called apiStorage.py
-#       in your clone to have api access!
 
-# TODO:
-# workflow:
-# if prelim definitions don't exist, create definitions
-# otherwise, begin analysis of given data
-# 
-# analysis of data:
-#   get fingerprint of new data
-#   get similarity coefficient of new data vs known categories
-#   append new dataset to category list based on highest coefficient score.
-#        catList.append(datasetName)
-#   
-#   print report of categorized datasets
-#   modify existing category fingerprints 
-
+# TODO: workflow
+# simulate construction of categories from scratch
+# create - 
+# provide a text file with information relevant to one of those categories
+# compare fingerprint from text file to fingerprints of categories
+# determine bestMatch (highest simCoefficient).
 
 from cortLib import *
 
