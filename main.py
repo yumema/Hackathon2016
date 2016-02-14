@@ -3,10 +3,18 @@
 #notes: be sure you have file called apiStorage.py
 #       in your clone to have api access!
 
-import retinasdk
-from apiStorage import apiKey
+from cortLib import *
 
-liteClient = retinasdk.LiteClient(apiKey)
-AhriAnalysis = liteClient.getFingerprint("Ahri is a very cute and stupid puppy.")
+sampleLite = retinasdk.LiteClient(apiKey)
 
-print(AhriAnalysis)
+# creating a filter for domestic pets
+domesticPetsFilter = sampleLite.createCategoryFilter(["cat", "puppy", "dog", "kitten", "rabbit", "bunny", "mouse", "rat"])
+
+# determine similarity rating of hamster to the filter
+print "hamster has a rate of: " + str( sampleLite.compare(domesticPetsFilter, "hamster") )
+
+# get merged fingerprint of hamster and pets category
+newFilter = assimilateTermInCategory( domesticPetsFilter, "hamster")
+
+# determine new similarity rating to updated category
+print "hamster has a rate of: " + str( sampleLite.compare(newFilter, "hamster") )
