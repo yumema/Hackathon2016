@@ -3,18 +3,40 @@
 #notes: be sure you have file called apiStorage.py
 #       in your clone to have api access!
 
+# TODO:
+# workflow:
+# if prelim definitions don't exist, create definitions
+# otherwise, begin analysis of given data
+# 
+# analysis of data:
+#   get fingerprint of new data
+#   get similarity coefficient of new data vs known categories
+#   append new dataset to category list based on highest coefficient score.
+#        catList.append(datasetName)
+#   
+#   print report of categorized datasets
+#   modify existing category fingerprints 
+
+
 from cortLib import *
 
-sampleLite = retinasdk.LiteClient(apiKey)
+oldDefs = "dataset/categories.txt"
 
-# creating a filter for domestic pets
-domesticPetsFilter = sampleLite.createCategoryFilter(["cat", "puppy", "dog", "kitten", "rabbit", "bunny", "mouse", "rat"])
+def main():
+#    try:
+#        categoryFingerprints = open(oldDefs, 'r') #established
+#    except FileNotFoundError:
+#        catCount = input("Please start establishing categories: ") #write in newcategories
+#        establishCategories(catCount)
+    exEstablishCategories()
+#        categoryFingerprints = open(oldDefs, 'r')
+#    print(categoryFingerprints)
 
-# determine similarity rating of hamster to the filter
-print "hamster has a rate of: " + str( sampleLite.compare(domesticPetsFilter, "hamster") )
+    #infile = open(oldDefs, 'w+')
+    #with open(oldDefs, 'r') as establishedCategories: #established
+           
+    getCategories()
+    
 
-# get merged fingerprint of hamster and pets category
-newFilter = assimilateTermInCategory( domesticPetsFilter, "hamster")
-
-# determine new similarity rating to updated category
-print "hamster has a rate of: " + str( sampleLite.compare(newFilter, "hamster") )
+if __name__ == "__main__":
+    main()
