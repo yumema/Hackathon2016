@@ -2,6 +2,7 @@ import json
 import retinasdk
 from apiStorage import apiKey
 
+# logging.basicConfig(level=logging.DEBUG, format='%(levelname)s - %(message)s')
 # helper functions
 
 # reusable client for handling API calls
@@ -12,6 +13,8 @@ sFunctionFullClient = retinasdk.FullClient(apiKey,
 aFunctionFullClient = retinasdk.FullClient(apiKey,
                 apiServer="http://api.cortical.io/rest",
                 retinaName="en_associative")
+
+FunctionLiteClient = retinasdk.LiteClient(apiKey)
 
 # input: category - a fingerprint of the category filter
 #        term     - the term you want to add to the category
@@ -89,3 +92,16 @@ def getCategories():
     
     return catList
 
+
+# input: FP - fingerprint to compare against multiple category fingerprints
+#        catList = list of categories in JSON format: {"positions": <fingerprint>, "categoryName": <nameOfCategory>}
+# output: the index of the highest similarity of the FP to list of categories
+def bestMatch(FP, catList):
+        name = ""
+        bestRate = 0
+        for i in range(0, len(catList)):
+                simValue = FunctionLiteClient.compare(FP, catList[i]["positions"])
+                if ( simValue > bestRate):
+                        bestRate = simValue
+                        name = catList[i]["categoryName"]
+ 	return name
