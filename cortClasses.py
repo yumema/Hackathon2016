@@ -7,7 +7,7 @@ class categories:
     def __init__(self):
         self.data = {} #key:value, name of category:fingerprint
         self.names = [] #list of category names contained here
-    
+        self.bucket = {} #list of NLPObject names that have been categorized
     #input: candidateCategoryName - string: potential new name of category
     #output: if given designation does not exist, start creating new category
     def checkCategory(self, candidateCategoryName):
@@ -25,7 +25,8 @@ class categories:
     def startNewCategory(self, newCategoryName):
         self.setCategoryName(newCategoryName)
         self.establishFP(newCategoryName, termsList)
-    
+        self.startBucket(newCategoryName)   
+ 
     #input: name - starts a new category with name
     #output: name is appended to list of category names and empty list initialized
     def setCategoryName(self, name):
@@ -38,6 +39,24 @@ class categories:
     def establishFP(self, name, terms):
         newFP = sFunctionFullClient.createCategoryFilter(name, terms)
         self.data[name] = json.dumps(newFP)
+
+    #in:    name - name of new bucket
+    #out:   new bucket list created
+    def startBucket(self, name):
+        self.bucket[name] = []
+
+    #in:    name - name of bucket to be added to
+    #       NLPObjectName - NLPObject to be added
+    #out:   modified bucket
+    def addToBucket(self, name, NLPObject):
+        self.bucket[name].append(NLPObject.getName())
+
+    #in:    name - name of category
+    #       NLPObject - object to be categorized
+    #out: calls to addToBucket and merge
+    def categorize(self, name, NLPObject):
+        self.addToBucket(name, NLPObject)
+        self.merge(name, NLPObject)
 
     #in:  name - name of category to be modified
     #     NLPObject - NLPObject to be used to incorporated into category
