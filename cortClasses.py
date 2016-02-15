@@ -8,7 +8,8 @@ class categories:
         self.data = {} #key:value, name of category:fingerprint
         self.categoryNames = [] #list of category names contained here
     
-    
+    #input: candidateCategoryName - string: potential new name of category
+    #output: if given designation does not exist, start creating new category
     def checkCategory(self, candidateCategoryName):
         #TODO: batch function of setting a new category
     
@@ -21,7 +22,11 @@ class categories:
         if nameDoesNotExist:
             self.startNewCategory(candidateCategoryName)
     
-    def startNewCategory(self, newCategoryName, 
+    #input: newCategoryName - string: name of new category
+    #output: starts creating new categories and fingerprints
+    def startNewCategory(self, newCategoryName):
+        self.setCategoryName(newCategoryName)
+        self.establishFP(newCategoryName, termsList)
     
     #input: name - starts a new category with name
     #output: name is appended to list of category names and empty list initialized
