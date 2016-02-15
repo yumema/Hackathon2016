@@ -9,6 +9,7 @@
 # compare fingerprint from text file to fingerprints of categories
 # determine bestMatch (highest simCoefficient).
 
+from cortClasses import *
 from cortLib import *
 
 categories = "dataset/categories.txt"
@@ -24,16 +25,20 @@ def main():
             establishCategories()
             needNewCategories = addMoreCategories() #continue to add?
     """
-    exEstablishCategories()
+    #exEstablishCategories()
 
 #test case: fileToFingerprint
 
-    fileFingerprint = (fileToFingerprint('dataset/cv001_18431.txt'))
+    #fileFingerprint = (fileToFingerprint('dataset/cv001_18431.txt'))
     
+    textAnalysis = NLP_object('Apple computers keep crashing', 'bug report #003')
+    textAnalysis.showName()
+    print(textAnalysis.compareToOther('Macintosh is the best!'))
+
 #test case: compare
-    compareCategoryList = getCategories()
+    #compareCategoryList = getCategories()
     #compareValue = input("provide string: ")
-    print(compare(compareCategoryList[0]['positions'], fileFingerprint))
+    #print(compare(compareCategoryList[0]['positions'], fileFingerprint))
 
 if __name__ == "__main__":
     main()
