@@ -1,0 +1,3 @@
+Hi guys,
+ 
+I have a student's iPad with me which is stuck at the Slide to open screen. The screen is completely unresponsive now. This started after the student restarted their iPad ordinarily, by sliding the power button on the screen. After the screen failed to respond to touch, I used a soft reset but the problem remained. Any suggestions on how to solve this problem?

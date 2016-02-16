@@ -1,0 +1,3 @@
+When I try to log into Bell email using Safari on my iPad 1, after entering my email address I get the message "Your browser is unsupported. Please upgrade your browser". Otherwise Safair works fine.
+My iPad is on ios5.1.1 and all 6 browsers in the App Store require iOS greater than 5, so what do I do short of being a new iPad?
+

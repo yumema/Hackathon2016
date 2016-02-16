@@ -22,7 +22,7 @@ class categories:
     
     #input: newCategoryName - string: name of new category
     #output: starts creating new categories and fingerprints
-    def startNewCategory(self, newCategoryName):
+    def startNewCategory(self, newCategoryName, termsList=[]):
         self.setCategoryName(newCategoryName)
         self.establishFP(newCategoryName, termsList)
         self.startBucket(newCategoryName)   
@@ -37,8 +37,9 @@ class categories:
     #       terms - array of strings: list of defining terms
     #output: new or redefined dict of category name
     def establishFP(self, name, terms):
-        newFP = sFunctionFullClient.createCategoryFilter(name, terms)
-        self.data[name] = json.dumps(newFP)
+        newFP = sFunctionFullClient.createCategoryFilter(name, terms).positions
+	#self.data[name] = json.dumps(newFP)
+	self.data[name] = newFP
 
     #in:    name - name of new bucket
     #out:   new bucket list created
@@ -54,9 +55,23 @@ class categories:
     #in:    name - name of category
     #       NLPObject - object to be categorized
     #out: calls to addToBucket and merge
-    def categorize(self, name, NLPObject):
+    def categorize(self, NLPObject):
+	name = self.determineBucket(NLPObject)
+	print "DEBUG: categorize decided on " + str(name)
         self.addToBucket(name, NLPObject)
         self.merge(name, NLPObject)
+
+    #in:  NLPObject - the NLPObject we want categorized
+    #out: returns name of category NLPObject best fits 
+    def determineBucket(self, NLPObject):
+        categoryName = ""
+        bestRate = 0
+        for name in self.names:
+            simValue = FunctionLiteClient.compare(self.data[name], NLPObject.getFP())
+            if (simValue > bestRate):
+                bestRate = simValue
+                categoryName = name 
+        return categoryName
 
     #in:  name - name of category to be modified
     #     NLPObject - NLPObject to be used to incorporated into category
@@ -69,8 +84,12 @@ class categories:
     def getFPOf(self, name):
         return self.data[name]
 
+    #show-ers
+    def printBuckets(self):
+	print self.bucket
+
 class NLPObject:
-    def __init__(self, text, name = ''):
+    def __init__(self, text, name =''):
         self.text = text #handle files too?
 
         if name == '': 

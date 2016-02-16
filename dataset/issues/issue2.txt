@@ -1,0 +1,9 @@
+Any chance someone could tell me how to change the "game time" for my lol client?
+
+whenever i want to chat with someone, my time would always be one minute behind everyone else, so if someone responds to me, theirs is on the bottom by one minute, while everything else I type continues to be above theirs until a minute passes, THEN im below theirs.
+
+Example:
+1st text (mine) [10:00]
+3rd text (mine) [10:00]
+4th text (mine) [10:00]
+2nd text (friend) [10:01]

@@ -2,7 +2,6 @@ import json
 import retinasdk
 from apiStorage import apiKey
 
-# logging.basicConfig(level=logging.DEBUG, format='%(levelname)s - %(message)s')
 # helper functions
 
 # reusable client for handling API calls

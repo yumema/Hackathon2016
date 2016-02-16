@@ -1,0 +1,15 @@
+I encountered the avast error. But before I saw how to fix it, I uninstalled league of legends.
+
+Note. I have uninstalled the game.
+I am going in from scratch.
+The installer will not patch properly.
+
+Now I have updated my drivers, downloaded game multiple times, turned off firewall, allowed avast permission for lol, deleted said files on support page, reinstalled over and over.
+
+There is no PLAY button.
+
+There is a LAUNCH button that you can click, but it will just go gray and nothing will happen.
+
+PLEASE HELP!
+
+I've spent over 20 hours trying to fix this and followed multiple instructions involving rebooting and reinstalling league.
