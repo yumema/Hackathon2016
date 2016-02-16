@@ -38,8 +38,7 @@ class categories:
     #output: new or redefined dict of category name
     def establishFP(self, name, terms):
         newFP = sFunctionFullClient.createCategoryFilter(name, terms).positions
-	#self.data[name] = json.dumps(newFP)
-	self.data[name] = newFP
+        self.data[name] = newFP
 
     #in:    name - name of new bucket
     #out:   new bucket list created
@@ -56,8 +55,8 @@ class categories:
     #       NLPObject - object to be categorized
     #out: calls to addToBucket and merge
     def categorize(self, NLPObject):
-	name = self.determineBucket(NLPObject)
-	print "DEBUG: categorize decided on " + str(name)
+        name = self.determineBucket(NLPObject)
+        print("DEBUG: categorize decided on " + str(name))
         self.addToBucket(name, NLPObject)
         self.merge(name, NLPObject)
 
@@ -86,7 +85,7 @@ class categories:
 
     #show-ers
     def printBuckets(self):
-	print self.bucket
+        print(self.bucket)
 
 class NLPObject:
     def __init__(self, text, name =''):
